@@ -24,6 +24,7 @@ public class CoreHealth : MonoBehaviour, IDamageable
         NotifyHealthChanged();
     }
 
+
     public void TakeDamage(int amount)
     {
         if (amount <= 0 || currentHealth <= 0)
