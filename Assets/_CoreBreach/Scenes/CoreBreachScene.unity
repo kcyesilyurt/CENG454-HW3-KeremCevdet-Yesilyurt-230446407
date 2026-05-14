@@ -442,6 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateController
   coreHealth: {fileID: 1548016934}
+  waveManager: {fileID: 1916594468}
   hudController: {fileID: 1137970583}
 --- !u!1 &661654502
 GameObject:
@@ -735,6 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUDController
   coreHealth: {fileID: 1548016934}
+  waveManager: {fileID: 1916594468}
   coreHealthText: {fileID: 1341971971}
   waveText: {fileID: 94790115}
   messageText: {fileID: 1818899455}

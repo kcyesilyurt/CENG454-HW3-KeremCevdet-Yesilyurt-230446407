@@ -5,6 +5,7 @@ public class HUDController : MonoBehaviour
 {
     [Header("Observed Systems")]
     [SerializeField] private CoreHealth coreHealth;
+    [SerializeField] private WaveManager waveManager;
 
     [Header("HUD Texts")]
     [SerializeField] private TMP_Text coreHealthText;
@@ -17,6 +18,11 @@ public class HUDController : MonoBehaviour
         {
             coreHealth.OnHealthChanged += HandleCoreHealthChanged;
         }
+
+        if (waveManager != null)
+        {
+            waveManager.OnWaveChanged += HandleWaveChanged;
+        }
     }
 
     private void OnDisable()
@@ -24,6 +30,11 @@ public class HUDController : MonoBehaviour
         if (coreHealth != null)
         {
             coreHealth.OnHealthChanged -= HandleCoreHealthChanged;
+        }
+
+        if (waveManager != null)
+        {
+            waveManager.OnWaveChanged -= HandleWaveChanged;
         }
     }
 
@@ -34,7 +45,15 @@ public class HUDController : MonoBehaviour
             HandleCoreHealthChanged(coreHealth.CurrentHealth, coreHealth.MaxHealth);
         }
 
-        SetWaveText(1, 3);
+        if (waveManager != null)
+        {
+            HandleWaveChanged(waveManager.CurrentWave, waveManager.MaxWaves);
+        }
+        else
+        {
+            SetWaveText(0, 3);
+        }
+
         ClearMessage();
     }
 
@@ -44,6 +63,11 @@ public class HUDController : MonoBehaviour
         {
             coreHealthText.text = $"Core HP: {currentHealth} / {maxHealth}";
         }
+    }
+
+    private void HandleWaveChanged(int currentWave, int maxWaves)
+    {
+        SetWaveText(currentWave, maxWaves);
     }
 
     public void SetWaveText(int currentWave, int maxWaves)
