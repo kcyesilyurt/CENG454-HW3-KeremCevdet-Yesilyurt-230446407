@@ -1739,6 +1739,7 @@ MonoBehaviour:
   - {fileID: 661654503}
   - {fileID: 300931412}
   - {fileID: 740811506}
+  gameStateController: {fileID: 502697616}
   waveOneEnemyCount: 3
   waveTwoEnemyCount: 5
   waveThreeEnemyCount: 7
