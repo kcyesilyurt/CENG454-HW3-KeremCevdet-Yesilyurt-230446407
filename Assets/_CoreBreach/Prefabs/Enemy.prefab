@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1903980926809934967}
   - component: {fileID: 8911163071733422844}
   - component: {fileID: 5354508272264898157}
+  - component: {fileID: 5779978799890523482}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -142,3 +143,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 1
+--- !u!114 &5779978799890523482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564482758066107367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b70d94109557143a0a52ee080193b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  maxHealth: 50
+  moveSpeed: 3
+  movementMode: 0
+  zigZagStrength: 0.75
+  zigZagFrequency: 4
+  coreTarget: {fileID: 0}
+  coreDamage: 10
+  attackDistance: 1.4
+  attackCooldown: 1
