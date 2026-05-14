@@ -752,6 +752,7 @@ GameObject:
   - component: {fileID: 1227119220}
   - component: {fileID: 1227119219}
   - component: {fileID: 1227119224}
+  - component: {fileID: 1227119225}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -896,6 +897,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 7
   rotationSpeed: 12
+--- !u!114 &1227119225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227119218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5a2f69cc410fd4391c33ba4a929f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
+  projectilePool: {fileID: 1429529530}
+  firePoint: {fileID: 1642301993}
+  damage: 25
+  fireRate: 0.25
 --- !u!1 &1341971969
 GameObject:
   m_ObjectHideFlags: 0
