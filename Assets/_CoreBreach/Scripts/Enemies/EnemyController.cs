@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -30,6 +31,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     private IMovementStrategy movementStrategy;
     private int currentHealth;
     private float attackTimer;
+    private bool isDead;
+
+    public event Action<EnemyController> OnEnemyDied;
 
     private void Awake()
     {
@@ -53,7 +57,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        if (coreTarget == null)
+        if (isDead || coreTarget == null)
         {
             return;
         }
@@ -63,13 +67,12 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        attackTimer -= Time.deltaTime;
-
-        if (coreTarget == null)
+        if (isDead || coreTarget == null)
         {
             return;
         }
 
+        attackTimer -= Time.deltaTime;
         TryAttackCore();
     }
 
@@ -120,7 +123,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount)
     {
-        if (amount <= 0 || currentHealth <= 0)
+        if (amount <= 0 || currentHealth <= 0 || isDead)
         {
             return;
         }
@@ -135,6 +138,13 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (isDead)
+        {
+            return;
+        }
+
+        isDead = true;
+        OnEnemyDied?.Invoke(this);
         Destroy(gameObject);
     }
 }
