@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   maxHealth: 50
-  moveSpeed: 3
+  moveSpeed: 1
   movementMode: 0
   zigZagStrength: 0.75
   zigZagFrequency: 4

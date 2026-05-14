@@ -1691,6 +1691,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1916594467}
+  - component: {fileID: 1916594468}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -1713,6 +1714,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1916594468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916594466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5687ba1d5f286c54294cd9a505af4e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  maxWaves: 3
+  timeBetweenWaves: 2
+  enemyPrefab: {fileID: 5779978799890523482, guid: 47b62e038108fa34b8f757d1e9dc1b46, type: 3}
+  spawnPoints:
+  - {fileID: 240502240}
+  - {fileID: 661654503}
+  - {fileID: 300931412}
+  - {fileID: 740811506}
+  waveOneEnemyCount: 3
+  waveTwoEnemyCount: 5
+  waveThreeEnemyCount: 7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
