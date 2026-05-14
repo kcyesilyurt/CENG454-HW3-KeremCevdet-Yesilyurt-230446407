@@ -915,6 +915,9 @@ MonoBehaviour:
   firePoint: {fileID: 1642301993}
   damage: 25
   fireRate: 0.25
+  upgradeMode: 3
+  bonusDamage: 25
+  fireRateMultiplier: 0.5
 --- !u!1 &1341971969
 GameObject:
   m_ObjectHideFlags: 0
