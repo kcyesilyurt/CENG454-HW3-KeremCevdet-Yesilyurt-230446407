@@ -4,6 +4,7 @@ public class GameStateController : MonoBehaviour
 {
     [Header("Observed Systems")]
     [SerializeField] private CoreHealth coreHealth;
+    [SerializeField] private WaveManager waveManager;
 
     [Header("UI")]
     [SerializeField] private HUDController hudController;
@@ -18,6 +19,11 @@ public class GameStateController : MonoBehaviour
         {
             coreHealth.OnCoreDestroyed += HandleCoreDestroyed;
         }
+
+        if (waveManager != null)
+        {
+            waveManager.OnAllWavesCompleted += HandleAllWavesCompleted;
+        }
     }
 
     private void OnDisable()
@@ -25,6 +31,11 @@ public class GameStateController : MonoBehaviour
         if (coreHealth != null)
         {
             coreHealth.OnCoreDestroyed -= HandleCoreDestroyed;
+        }
+
+        if (waveManager != null)
+        {
+            waveManager.OnAllWavesCompleted -= HandleAllWavesCompleted;
         }
     }
 
@@ -43,5 +54,22 @@ public class GameStateController : MonoBehaviour
         }
 
         Debug.Log("Game Over: Core destroyed.");
+    }
+
+    private void HandleAllWavesCompleted()
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+
+        isGameOver = true;
+
+        if (hudController != null)
+        {
+            hudController.SetMessage("FACILITY DEFENDED - YOU WIN");
+        }
+
+        Debug.Log("Game Won: All waves completed.");
     }
 }
