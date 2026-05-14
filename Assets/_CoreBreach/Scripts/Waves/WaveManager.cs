@@ -13,6 +13,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private EnemyController enemyPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
+    [Header("Game State")]
+    [SerializeField] private GameStateController gameStateController;
+
     [Header("Wave Enemy Counts")]
     [SerializeField] private int waveOneEnemyCount = 3;
     [SerializeField] private int waveTwoEnemyCount = 5;
@@ -37,16 +40,25 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator StartNextWaveAfterDelay(float delay)
     {
+        if (IsGameOver())
+        {
+            yield break;
+        }
+
         isSpawning = true;
         yield return new WaitForSeconds(delay);
 
-        StartNextWave();
+        if (!IsGameOver())
+        {
+            StartNextWave();
+        }
+
         isSpawning = false;
     }
 
     private void StartNextWave()
     {
-        if (wavesCompleted)
+        if (wavesCompleted || IsGameOver())
         {
             return;
         }
@@ -86,6 +98,11 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnEnemy(int spawnIndex)
     {
+        if (IsGameOver())
+        {
+            return;
+        }
+
         if (enemyPrefab == null || spawnPoints == null || spawnPoints.Length == 0)
         {
             Debug.LogError("WaveManager is missing enemy prefab or spawn points.");
@@ -114,7 +131,7 @@ public class WaveManager : MonoBehaviour
         enemy.OnEnemyDied -= HandleEnemyDied;
         aliveEnemies.Remove(enemy);
 
-        if (aliveEnemies.Count == 0 && !isSpawning && !wavesCompleted)
+        if (aliveEnemies.Count == 0 && !isSpawning && !wavesCompleted && !IsGameOver())
         {
             StartCoroutine(StartNextWaveAfterDelay(timeBetweenWaves));
         }
@@ -122,8 +139,18 @@ public class WaveManager : MonoBehaviour
 
     private void CompleteAllWaves()
     {
+        if (wavesCompleted || IsGameOver())
+        {
+            return;
+        }
+
         wavesCompleted = true;
         OnAllWavesCompleted?.Invoke();
         Debug.Log("All waves completed.");
+    }
+
+    private bool IsGameOver()
+    {
+        return gameStateController != null && gameStateController.IsGameOver;
     }
 }

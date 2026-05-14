@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour, IPoolable
     [Header("Projectile Settings")]
     [SerializeField] private float speed = 14f;
     [SerializeField] private float lifeTime = 2.5f;
+    [SerializeField] private string damageableTargetTag = "Enemy";
 
     private ProjectilePool owningPool;
     private Vector3 moveDirection;
@@ -48,11 +49,27 @@ public class Projectile : MonoBehaviour, IPoolable
             return;
         }
 
-        IDamageable damageable = other.GetComponent<IDamageable>();
-
-        if (damageable != null)
+        if (other.CompareTag(damageableTargetTag))
         {
-            damageable.TakeDamage(damage);
+            IDamageable damageable = other.GetComponent<IDamageable>();
+
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+            }
+
+            ReturnToPool();
+            return;
+        }
+
+        if (other.CompareTag("EnergyCore"))
+        {
+            ReturnToPool();
+            return;
+        }
+
+        if (!other.CompareTag("Player"))
+        {
             ReturnToPool();
         }
     }
